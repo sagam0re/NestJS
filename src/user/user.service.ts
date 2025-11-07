@@ -22,6 +22,11 @@ export class UserService {
     return user ? [user] : [];
   }
 
+  async findOneByUsername(username: string): Promise<IUser | null> {
+    const user = await this.userModel.findOne({ username });
+    return user;
+  }
+
   async findAll(): Promise<IUser[]> {
     const users = await this.userModel.find();
     return users;

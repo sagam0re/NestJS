@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { IUser } from 'src/schemas/user/user.type';
-import { CreateUserDto } from 'src/user/dto/create-user.dto';
+import type { ICreateUserDto } from 'src/user/dto/create-user.dto';
 import { UserService } from 'src/user/user.service';
 
 @Controller('user')
@@ -8,7 +8,7 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post('create')
-  async createUser(@Body() createUserDto: CreateUserDto): Promise<IUser> {
+  async createUser(@Body() createUserDto: ICreateUserDto): Promise<IUser> {
     const user = await this.userService.createUser(createUserDto);
     return user;
   }
