@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { IPayload } from 'src/auth/payload.type';
-import { IUser } from 'src/schemas/user/user.type';
-import { comparePasswords } from 'src/shared/hash-password';
-import { UserService } from 'src/user/user.service';
+import { IPayload } from '@/auth/payload.type';
+import { IUser } from '@/schemas/user/user.type';
+import { comparePasswords } from '@/shared/hash-password';
+import { UserService } from '@/user/user.service';
 
 @Injectable()
 export class AuthService {

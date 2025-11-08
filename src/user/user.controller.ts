@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { IUser } from 'src/schemas/user/user.type';
-import type { ICreateUserDto } from 'src/user/dto/create-user.dto';
-import { UserService } from 'src/user/user.service';
+import { IUser } from '@/schemas/user/user.type';
+import type { ICreateUserDto } from '@/user/dto/create-user.dto';
+import { UserService } from '@/user/user.service';
 
 @Controller('user')
 export class UserController {

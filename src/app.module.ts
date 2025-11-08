@@ -5,8 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import jwtConfig from 'src/config/jwt.config';
-import dbConfig from 'src/config/db.config';
+import jwtConfig from '@/config/jwt.config';
+import dbConfig from '@/config/db.config';
 
 @Module({
   imports: [
