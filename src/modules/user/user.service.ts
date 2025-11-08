@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from '@/schemas/user/user.schema';
 import { IUser } from '@/schemas/user/user.type';
 import { hashPassword } from '@/shared/hash-password';
-import { CreateUserDto } from '@/user/dto/create-user.dto';
+import { CreateUserDto } from '@/modules/user/dto/create-user.dto';
 
 @Injectable()
 export class UserService {
@@ -23,7 +23,7 @@ export class UserService {
     ]);
 
     if (user.length > 0) {
-      throw new Error('User already exists');
+      throw new HttpException('User already exists', 409);
     }
 
     createUserDto.password = await hashPassword(createUserDto.password, 12);

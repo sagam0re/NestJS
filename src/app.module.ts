@@ -3,10 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 import jwtConfig from '@/config/jwt.config';
 import dbConfig from '@/config/db.config';
+import { AuthModule } from '@/modules/auth/auth.module';
 
 @Module({
   imports: [
