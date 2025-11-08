@@ -4,16 +4,31 @@ import { Model } from 'mongoose';
 import { User, UserDocument } from '@/schemas/user/user.schema';
 import { IUser } from '@/schemas/user/user.type';
 import { hashPassword } from '@/shared/hash-password';
-import { ICreateUserDto } from '@/user/dto/create-user.dto';
+import { CreateUserDto } from '@/user/dto/create-user.dto';
 
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async createUser(createUserDto: ICreateUserDto): Promise<IUser> {
+  async createUser(createUserDto: CreateUserDto): Promise<IUser> {
+    const user = await this.userModel.aggregate([
+      {
+        $match: {
+          $or: [
+            { username: createUserDto.username },
+            { email: createUserDto.email },
+          ],
+        },
+      },
+    ]);
+
+    if (user.length > 0) {
+      throw new Error('User already exists');
+    }
+
     createUserDto.password = await hashPassword(createUserDto.password, 12);
-    const user = new this.userModel(createUserDto);
-    const savedUser = await user.save();
+    const newUser = new this.userModel(createUserDto);
+    const savedUser = await newUser.save();
     return savedUser;
   }
 
