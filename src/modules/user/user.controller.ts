@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put, Query } from '@nestjs/common';
 import { IUser } from '@/schemas/user/user.type';
 import { CreateUserDto } from '@/modules/user/dto/create-user.dto';
 import { UserService } from '@/modules/user/user.service';
+import { UpdateUserDto } from '@/modules/user/dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -11,6 +12,15 @@ export class UserController {
   async createUser(@Body() createUserDto: CreateUserDto) {
     const user = await this.userService.createUser(createUserDto);
 
+    return user;
+  }
+
+  @Put('update')
+  async updateUser(
+    @Query('userId') userId: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    const user = await this.userService.updateUser(userId, updateUserDto);
     return user;
   }
 

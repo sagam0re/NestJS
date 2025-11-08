@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  //IsStrongPassword,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -25,6 +26,7 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
+  //@IsStrongPassword()
   password: string;
 
   @IsOptional()
